@@ -71,8 +71,8 @@
     "home": "Inicio",
     "q5": "¿Qué plataformas están disponibles?",
     "a5": "Linux con Flatpak es la plataforma principal. Windows se ofrece como ZIP experimental y requiere actualización manual.",
-    "downloadLinux": "Ver releases para Linux (.flatpak) ↗",
-    "downloadWindows": "Ver releases para Windows (.exe) ↗"
+    "downloadLinux": "Descargar para Linux (.flatpak) ↗",
+    "downloadWindows": "Descargar para Windows (.exe) ↗"
   },
   "en": {
     "nav": "The browser",
@@ -146,8 +146,8 @@
     "home": "Home",
     "q5": "Which platforms are available?",
     "a5": "Linux with Flatpak is the primary platform. Windows is offered as an experimental ZIP with manual updates.",
-    "downloadLinux": "View releases for Linux (.flatpak) ↗",
-    "downloadWindows": "View releases for Windows (.exe) ↗"
+    "downloadLinux": "Download for Linux (.flatpak) ↗",
+    "downloadWindows": "Download for Windows (.exe) ↗"
   },
   "ca": {
     "nav": "El navegador",
@@ -221,7 +221,7 @@
     "home": "Inici",
     "q5": "Quines plataformes estan disponibles?",
     "a5": "Linux amb Flatpak és la plataforma principal. Windows s’ofereix com a ZIP experimental i requereix actualitzacions manuals.",
-    "downloadLinux": "Veure releases per a Linux (.flatpak) ↗",
-    "downloadWindows": "Veure releases per a Windows (.exe) ↗"
+    "downloadLinux": "Descarregar per a Linux (.flatpak) ↗",
+    "downloadWindows": "Descarregar per a Windows (.exe) ↗"
   }
 }
