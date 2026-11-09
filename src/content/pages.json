@@ -1,0 +1,1214 @@
+{
+  "es": {
+    "docs": {
+      "title": "Documentación",
+      "intro": "Tu guía para empezar, configurar y entender Umbral.",
+      "sections": [
+        {
+          "heading": "Empieza por aquí",
+          "paragraphs": [
+            "Umbral es un fork de Zen basado en Firefox. Linux x86_64 es la plataforma probada durante el desarrollo; no se presenta como una versión estable para distribución general."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Instalación y actualizaciones",
+              "href": "install"
+            }
+          ]
+        },
+        {
+          "heading": "Personaliza tu inicio",
+          "paragraphs": [
+            "Añade tus propios accesos, edita su nombre y dirección, ordénalos o elimínalos. No se añaden sitios automáticamente. Las tarjetas inferiores muestran registros ETP y el estado de uBlock Origin."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Buscadores y SearXNG",
+          "paragraphs": [
+            "En Preferencias → Búsqueda puedes elegir tu motor. Para SearXNG, introduce la URL de una instancia de confianza y confirma el alta. Escribir la dirección no la contacta. Añadirla no cambia tu motor hasta que lo selecciones; no se habilitan sugerencias remotas de esa instancia."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "IA local, paso a paso",
+          "paragraphs": [
+            "Actívala en la bienvenida o en Preferencias → IA local. Su botón abre el panel aunque todavía no haya un modelo configurado. La elección es opcional y empieza desactivada.",
+            "Ejecuta un servidor local compatible con la API de OpenAI, configura su dirección base y el nombre exacto del modelo, y guarda. Por ejemplo, http://127.0.0.1:1234/v1 si tu servidor escucha ahí. Umbral añade /chat/completions; no incluyas esa ruta en la dirección base. La clave API es opcional según tu servidor.",
+            "Solo se envía una solicitud al mandar un mensaje. Puedes cancelar la petición, ocultar o redimensionar el panel y borrar la conversación. Umbral no descarga ni ejecuta el modelo."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Contenedores, extensiones y contraseñas",
+          "paragraphs": [
+            "Las nuevas pestañas heredan el contenedor activo; sin pestaña útil, se recurre al último usado en ese espacio. Puedes seleccionar otro desde el desplegable. Los contenedores separan contextos de sesión, no proporcionan anonimato.",
+            "uBO mantiene su panel original junto a la barra. En Preferencias puedes dejar de recibir ofertas para guardar contraseñas sin desactivar el autocompletado ni borrar claves existentes. Algunas integraciones de gestores externos con programas del equipo requieren soporte específico en Flatpak."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "install": {
+      "title": "Instalación y descargas",
+      "intro": "Paquetes de prueba y pasos para usarlos sin mezclar tus perfiles.",
+      "sections": [
+        {
+          "heading": "Disponibilidad real",
+          "paragraphs": [
+            "Linux x86_64 con Flatpak es la plataforma principal y recomendada. Windows x86_64 se ofrece como ZIP experimental, con instalación y actualizaciones manuales. No se alojan binarios en esta web ni se anuncia disponibilidad en Flathub."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Código y paquetes publicados, si los hay",
+              "href": "https://github.com/Martin08ABM/umbral-browser/releases"
+            },
+            {
+              "label": "Guía técnica de compilación",
+              "href": "https://github.com/Martin08ABM/umbral-browser/blob/main/docs/test-builds.md"
+            }
+          ]
+        },
+        {
+          "heading": "Instalar tu bundle Flatpak",
+          "paragraphs": [
+            "Con Flatpak y el runtime requerido disponibles, ejecuta desde la raíz de tu checkout con el bundle recién generado. No es una descarga pública de esta web."
+          ],
+          "code": "flatpak install --user dist/umbral-linux-x86_64.flatpak\nflatpak run io.github.martin08abm.umbralbrowser",
+          "links": []
+        },
+        {
+          "heading": "Perfil permanente y navegador predeterminado",
+          "paragraphs": [
+            "El lanzador Flatpak usa ~/.var/app/io.github.martin08abm.umbralbrowser/data/umbral/profile. Los perfiles de las pruebas bajo /tmp son temporales. Conserva una copia de tus datos antes de migrar; no copies un perfil mientras el navegador esté abierto.",
+            "En KDE selecciona Umbral en Ajustes del sistema → Aplicaciones predeterminadas → Navegador web. En Flatpak, el asistente no puede establecerlo directamente y remite a la configuración del escritorio."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Actualizar manualmente",
+          "paragraphs": [
+            "Las actualizaciones del navegador son manuales. En Linux, antes de sustituir el Flatpak, cierra Umbral y respalda su perfil. Compila o consigue un bundle más reciente de confianza. Reinstalar conserva los datos si no usas --delete-data. Comprueba el identificador de compilación en about:support; el nombre del paquete puede seguir siendo 1.0.0. En Windows, sustituye manualmente los archivos del ZIP por los de una compilación nueva."
+          ],
+          "code": "flatpak uninstall --user io.github.martin08abm.umbralbrowser\nflatpak install --user dist/umbral-linux-x86_64.flatpak",
+          "links": []
+        },
+        {
+          "heading": "Desinstalar sin borrar datos",
+          "paragraphs": [
+            "Este comando elimina la aplicación y conserva el perfil. Añadir --delete-data borra también los datos privados de la aplicación: es una opción destructiva, no un paso de actualización."
+          ],
+          "code": "flatpak uninstall --user io.github.martin08abm.umbralbrowser",
+          "links": []
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacidad y datos",
+      "intro": "Qué protege Umbral, qué guarda y cuándo pueden salir datos del equipo.",
+      "sections": [
+        {
+          "heading": "El alcance de estas notas",
+          "paragraphs": [
+            "Estas notas describen las funciones de Umbral conocidas a 4 de noviembre de 2026. No son una auditoría completa del tráfico de Firefox, una garantía de anonimato ni una certificación de cumplimiento normativo. Las decisiones de cada proveedor externo también cuentan."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Protecciones y estadísticas",
+          "paragraphs": [
+            "ETP estricto y FPP están activos; RFP permanece desactivado. uBlock Origin se distribuye sin modificar y mantiene sus propios filtros, controles y excepciones. La protección reduce parte del rastreo, pero una huella digital todavía puede ser distinguible.",
+            "Las tarjetas consultan solo agregados de rastreadores y cookies de rastreo clasificados por ETP, hoy y los seis días UTC anteriores. No son estadísticas de uBO, anuncios individuales ni solicitudes HTTP. Firefox excluye la actividad privada de ese registro persistente. La homepage recibe dos números y el estado de uBO, no URLs ni historial."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "IA local y credenciales",
+          "paragraphs": [
+            "La IA comienza desactivada. Activarla, abrir el panel o guardar ajustes no genera tráfico. Al enviar, el servidor configurado recibe el texto de la conversación; no se recopilan automáticamente pestañas, páginas, historial ni formularios. Revisa el texto que pegues y la configuración del servidor.",
+            "Las conversaciones viven en memoria, separadas por ventana y por navegación normal o privada. Ocultar el panel las conserva; puedes borrarlas. La clave se almacena mediante LoginManager, no en esta web. Un servidor local puede guardar sus propios logs: esa configuración queda fuera de Umbral."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Conexiones externas",
+          "paragraphs": [
+            "Tu buscador recibe tus consultas. SearXNG solo se contacta al confirmar el alta de instancia o usarlo para buscar; no se activan sugerencias remotas de esa instancia. uBO puede descargar listas y las extensiones pueden consultar sus actualizaciones. Las páginas que visitas generan su propio tráfico.",
+            "No se ha completado una auditoría de todas las conexiones y servicios heredados de Firefox/Zen. No afirmamos «cero conexiones», «cero telemetría» ni que el modo privado o Flatpak eliminen todo rastreo. Las actualizaciones automáticas del navegador no están operativas; por ahora, las actualizaciones se hacen manualmente."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Esta web y los reportes",
+          "paragraphs": [
+            "El código de esta web no añade analítica, anuncios, formularios de recogida ni fuentes remotas. El alojamiento puede procesar datos técnicos de acceso; la vista privada también depende de la autenticación de su proveedor. Al seguir enlaces a GitHub se aplican sus propias condiciones.",
+            "Los issues normales son públicos. No adjuntes perfiles completos, contraseñas, claves API, cookies ni historiales. Comparte solo logs y capturas revisados."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "help": {
+      "title": "Ayuda y reportes",
+      "intro": "Encuentra las limitaciones conocidas y prepara un reporte útil.",
+      "sections": [
+        {
+          "heading": "Antes de reportar",
+          "paragraphs": [
+            "Busca si el problema ya existe. Anota la versión y el ID de compilación de about:support, sistema, formato del paquete y los pasos exactos. Si puedes, reproduce en un perfil temporal; conserva tu perfil personal. No es obligatorio probar Firefox para pedir ayuda."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Reportar un error o proponer una idea",
+          "paragraphs": [
+            "Los botones siguientes preparan un issue normal en el repositorio de Umbral. GitHub te pedirá iniciar sesión y revisar el texto antes de enviarlo. No se envía nada desde esta web. No uses estos reportes para vulnerabilidades."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Problemas conocidos",
+          "paragraphs": [
+            "Las actualizaciones del navegador son manuales. Windows se ofrece como ZIP experimental. La firma de distribución y la publicación en Flathub siguen pendientes. El español del paquete completo y las integraciones nativas de gestores externos necesitan validación más amplia.",
+            "Las tarjetas ETP pueden tardar en registrar actividad y no cuentan bloqueos de uBO. La IA necesita un servidor y modelo activos. No hay una mejora de rendimiento demostrada frente a una referencia equivalente."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Si la IA o las extensiones no aparecen",
+          "paragraphs": [
+            "Comprueba que instalaste el paquete regenerado y no solo compilaste engine/. La versión del archivo puede seguir siendo 1.0.0: usa el ID de compilación. La IA debe poder abrir el panel sin modelo; las extensiones deben conservar su ubicación elegida. Si esto falla, es una regresión que puedes reportar."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "security": {
+      "title": "Seguridad",
+      "intro": "Comunicación responsable de vulnerabilidades y límites del mantenimiento actual.",
+      "sections": [
+        {
+          "heading": "Reportes privados",
+          "paragraphs": [
+            "No publiques detalles de explotación, secretos ni datos de terceros en un issue normal. En la pestaña Security de GitHub, usa «Report a vulnerability» si está habilitado. Su disponibilidad no se ha comprobado ni activado desde esta web.",
+            "Si el canal privado no aparece, abre solo una petición de contacto de seguridad, sin describir la vulnerabilidad. No se publica un correo inventado ni se promete un tiempo de respuesta."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Seguridad del repositorio",
+              "href": "https://github.com/Martin08ABM/umbral-browser/security"
+            },
+            {
+              "label": "Cómo funciona el reporte privado en GitHub",
+              "href": "https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately"
+            }
+          ]
+        },
+        {
+          "heading": "Qué incluir de forma privada",
+          "paragraphs": [
+            "Versión, ID de compilación, plataforma, pasos mínimos, impacto observado y una prueba de concepto sin datos reales. Distingue lo observado de lo que sospechas. Investiga solo en sistemas y datos sobre los que tengas autorización."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Estado de mantenimiento",
+          "paragraphs": [
+            "Umbral es experimental. No existe todavía un calendario garantizado de correcciones, una matriz de versiones soportadas ni un canal operativo de actualización del navegador. Heredar Firefox no basta: incorporar y distribuir sus correcciones sigue siendo responsabilidad del proyecto."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "conduct": {
+      "title": "Código de conducta",
+      "intro": "Un espacio para colaborar con respeto y discrepar sobre ideas.",
+      "sections": [
+        {
+          "heading": "Cómo participamos",
+          "paragraphs": [
+            "Trata a las personas con respeto, independientemente de su experiencia, origen, identidad o creencias. Acepta críticas sobre el código y las decisiones del proyecto. Sé claro y directo sin atacar a quien participa."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Límites",
+          "paragraphs": [
+            "No se aceptan acoso, amenazas, discriminación, insultos personales, exposición de datos privados ni atención sexual no solicitada. Las diferencias técnicas o ideológicas no justifican estas conductas. No conviertas issues técnicos en campañas ajenas al proyecto."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Moderación y alcance",
+          "paragraphs": [
+            "Estas normas se aplican a los espacios de Umbral y a quienes representen oficialmente el proyecto. La moderación puede pedir cambios, retirar contenido o limitar la participación de forma proporcional; los casos graves pueden requerir una restricción inmediata."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Comunicar un incidente",
+          "paragraphs": [
+            "Puedes usar las herramientas de GitHub para reportar contenido abusivo de su plataforma. El proyecto todavía debe configurar un contacto privado específico de moderación antes de abrir una comunidad más amplia. No publiques datos personales ni informes sensibles en issues; no uses el correo de Zen para incidentes de Umbral."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "contribute": {
+      "title": "Contribuir a Umbral",
+      "intro": "Cómo proponer cambios reproducibles sin perder las fuentes persistentes.",
+      "sections": [
+        {
+          "heading": "Antes de empezar",
+          "paragraphs": [
+            "Para cambios grandes, abre primero una propuesta con el problema y el resultado esperado. No hace falta escribir código para ayudar: también sirven reportes claros, traducciones, documentación y pruebas en otras plataformas."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Fuentes y compilación",
+          "paragraphs": [
+            "Trabaja desde la raíz del repo de Umbral. engine/ es un repositorio generado distinto; no lo trates como origen. Los cambios del navegador deben vivir en src/, prefs/, configs/, locales/, surfer.json y sus parches. Preserva los symlinks y registra recursos nuevos según el empaquetado existente.",
+            "Para un checkout nuevo preparado con los requisitos de Mozilla y del proyecto, el flujo usa npm ci y npm run init antes de compilar. En un árbol ya inicializado, importa y compila los cambios actuales. No actualices la base fijada como efecto secundario de una tarea de interfaz."
+          ],
+          "code": "npm run import\nMOZ_PURGE_CACHES=1 npm run build:ui\ngit diff --check",
+          "links": []
+        },
+        {
+          "heading": "Qué debe traer una propuesta de cambio",
+          "paragraphs": [
+            "Describe el problema, el comportamiento final, las pruebas ejecutadas y sus límites. Usa perfiles temporales para pruebas; no adjuntes perfiles personales. Distingue compilación, inspección estática y verificación real. Las pruebas deben comprobar comportamiento, no repetir la implementación."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Créditos y alcance",
+          "paragraphs": [
+            "Mantén los avisos de licencia y atribución. No elimines créditos ni renombres globalmente referencias técnicas de Zen o Firefox. Para correcciones de seguridad, usa el canal privado en vez de un PR público con detalles explotables."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "project": {
+      "title": "El proyecto",
+      "intro": "Por qué existe Umbral y qué falta para una distribución más amplia.",
+      "sections": [
+        {
+          "heading": "La idea",
+          "paragraphs": [
+            "Umbral busca unir una experiencia visual cuidada con privacidad práctica y control del usuario. Es un proyecto independiente de Martin construido sobre el trabajo de Zen y Mozilla, no un motor creado desde cero."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Qué priorizamos",
+          "paragraphs": [
+            "Reducir ruido, separar contextos con contenedores, ofrecer protección desde el inicio y hacer opcionales las herramientas como la IA. No añadir funciones a costa de perder reproducibilidad, claridad sobre los datos o capacidad de mantener el navegador."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Siguiente etapa, sin fechas prometidas",
+          "paragraphs": [
+            "Prioridad: mantenimiento de la base y entrega fiable de correcciones en Linux con Flatpak. Windows se ofrece como ZIP experimental y necesita actualización manual. También quedan pendientes firmas y actualizaciones de producción, accesibilidad, auditoría de conexiones y evaluación de Flathub."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Créditos y licencias",
+          "paragraphs": [
+            "El navegador conserva MPL-2.0 y los avisos de sus componentes. uBlock Origin se redistribuye original y firmado, con GPL-3.0-only y su atribución a Raymond Hill y colaboradores. Las marcas de Mozilla, Firefox y Zen pertenecen a sus titulares. No se presenta Umbral como producto oficial de esos proyectos."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Repositorio de Umbral",
+              "href": "https://github.com/Martin08ABM/umbral-browser"
+            },
+            {
+              "label": "Zen Browser",
+              "href": "https://github.com/zen-browser/desktop"
+            },
+            {
+              "label": "Mozilla Firefox",
+              "href": "https://www.mozilla.org/firefox/"
+            },
+            {
+              "label": "uBlock Origin",
+              "href": "https://github.com/gorhill/uBlock"
+            }
+          ]
+        }
+      ]
+    },
+    "changelog": {
+      "title": "Cambios y estado",
+      "intro": "Resumen de desarrollo; no sustituye las notas de una release publicada.",
+      "sections": [
+        {
+          "heading": "Estado a 4 de noviembre de 2026",
+          "paragraphs": [
+            "Se han generado paquetes Linux de prueba. No se asignan aquí tags, firmas o versiones estables nuevas. Las compilaciones pueden compartir el nombre 1.0.0; identifica cada prueba por su ID de compilación y commit cuando esté disponible."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Cambios implementados y probados",
+          "paragraphs": [
+            "Homepage y accesos locales; métricas ETP; uBO original; buscador SearXNG opcional; herencia de contenedores; bienvenida propia; General sin accesos de cuenta y Sync; ofertas de guardado separadas del autocompletado; panel de IA local opcional.",
+            "Se corrigieron la visibilidad de extensiones al terminar la bienvenida y el botón de IA que Zen trasladaba a una zona oculta. La IA puede abrirse sin configurar servidor. Las pruebas de desarrollo cubrieron perfiles temporales; el usuario también confirmó envío y recepción con su servidor real. Esto no equivale a una matriz completa de modelos compatibles."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Pendiente",
+          "paragraphs": [
+            "Infraestructura y claves de producción, actualización manual del ZIP experimental de Windows, validación más amplia de idioma y accesibilidad, y mejoras de interfaz del panel de IA. No se ha demostrado una mejora de rendimiento."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    }
+  },
+  "en": {
+    "docs": {
+      "title": "Documentation",
+      "intro": "Your guide to starting, configuring and understanding Umbral.",
+      "sections": [
+        {
+          "heading": "Start here",
+          "paragraphs": [
+            "Umbral is a Zen fork based on Firefox. Linux with Flatpak is the primary platform; Windows is offered as an experimental ZIP with manual updates. This is not presented as a stable general release."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Installation and updates",
+              "href": "install"
+            }
+          ]
+        },
+        {
+          "heading": "Make the homepage yours",
+          "paragraphs": [
+            "Add your own shortcuts, edit their names and addresses, reorder or remove them. Sites are not added automatically. The cards below show ETP records and uBlock Origin status."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Search engines and SearXNG",
+          "paragraphs": [
+            "Choose your engine in Settings → Search. For SearXNG, enter a trusted instance URL and confirm adding it. Typing the URL does not contact it. Adding it does not switch engines until you select it; remote suggestions from that instance are not enabled."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Local AI, step by step",
+          "paragraphs": [
+            "Enable it in onboarding or Settings → Local AI. Its button opens the panel even before a model is configured. It is optional and off by default.",
+            "Run a local server compatible with the OpenAI API, configure its base URL and exact model name, then save. For example, http://127.0.0.1:1234/v1 if your server listens there. Umbral appends /chat/completions; do not include that path in the base URL. The API key is optional depending on your server.",
+            "A request is made only when you send a message. You can cancel it, hide or resize the panel, and clear the conversation. Umbral does not download or run the model."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Containers, extensions and passwords",
+          "paragraphs": [
+            "New tabs inherit the active container; without a usable tab, the last used in that workspace is used. Select another from the dropdown. Containers separate session contexts; they do not provide anonymity.",
+            "uBO keeps its original popup beside the address bar. Settings let you stop password-saving offers without disabling autofill or deleting existing passwords. Some external password-manager integrations with host apps need specific Flatpak support."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "install": {
+      "title": "Installation and downloads",
+      "intro": "Test packages and instructions that keep your profiles separate.",
+      "sections": [
+        {
+          "heading": "Actual availability",
+          "paragraphs": [
+            "Linux x86_64 with Flatpak is the primary and recommended platform. Windows x86_64 is offered as an experimental ZIP with manual installation and updates. This website does not host binaries or announce Flathub availability."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Source and published packages, if any",
+              "href": "https://github.com/Martin08ABM/umbral-browser/releases"
+            },
+            {
+              "label": "Technical build guide",
+              "href": "https://github.com/Martin08ABM/umbral-browser/blob/main/docs/test-builds.md"
+            }
+          ]
+        },
+        {
+          "heading": "Install your Flatpak bundle",
+          "paragraphs": [
+            "With Flatpak and the required runtime available, run this from your checkout root with the freshly generated bundle. This is not a public download from this website."
+          ],
+          "code": "flatpak install --user dist/umbral-linux-x86_64.flatpak\nflatpak run io.github.martin08abm.umbralbrowser",
+          "links": []
+        },
+        {
+          "heading": "Permanent profile and default browser",
+          "paragraphs": [
+            "The Flatpak launcher uses ~/.var/app/io.github.martin08abm.umbralbrowser/data/umbral/profile. Test profiles under /tmp are temporary. Keep a backup before migrating; do not copy a profile while the browser is open.",
+            "In KDE, select Umbral in System Settings → Default Applications → Web Browser. In Flatpak, onboarding cannot set it directly and points you to desktop settings."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Update manually",
+          "paragraphs": [
+            "Browser updates are manual. On Linux, before replacing the Flatpak, close Umbral and back up its profile. Build or obtain a newer trusted bundle. Reinstalling preserves data if you do not use --delete-data. Check the build identifier in about:support; the package name may still say 1.0.0. On Windows, manually replace the ZIP files with those from a newer build."
+          ],
+          "code": "flatpak uninstall --user io.github.martin08abm.umbralbrowser\nflatpak install --user dist/umbral-linux-x86_64.flatpak",
+          "links": []
+        },
+        {
+          "heading": "Uninstall without deleting data",
+          "paragraphs": [
+            "This removes the application and preserves the profile. Adding --delete-data also erases its private app data: that is a destructive option, not an update step."
+          ],
+          "code": "flatpak uninstall --user io.github.martin08abm.umbralbrowser",
+          "links": []
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy and data",
+      "intro": "What Umbral protects, what it stores, and when data can leave your computer.",
+      "sections": [
+        {
+          "heading": "Scope of these notes",
+          "paragraphs": [
+            "These notes describe known Umbral features as of 4 November 2026. They are not a full Firefox traffic audit, an anonymity guarantee, or a regulatory compliance certification. External providers’ own practices also matter."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Protection and metrics",
+          "paragraphs": [
+            "Strict ETP and FPP are enabled; RFP remains off. uBlock Origin is distributed unmodified with its own filters, controls and exceptions. Protection reduces some tracking, but a fingerprint may still be distinguishable.",
+            "Cards query only aggregate ETP-classified tracker and tracking-cookie records for today and the previous six UTC days. They are not uBO statistics, individual ads or HTTP requests. Firefox excludes private activity from this persistent record. The homepage receives two numbers and uBO status, not URLs or history."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Local AI and credentials",
+          "paragraphs": [
+            "AI starts disabled. Enabling it, opening the panel or saving settings generates no traffic. When you send, the configured server receives conversation text; tabs, pages, history and forms are not collected automatically. Review pasted text and your server configuration.",
+            "Conversations live in memory, separated by window and normal/private browsing. Hiding the panel retains them; you can clear them. The key is stored through LoginManager, not this website. A local server may keep its own logs: that configuration is outside Umbral."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "External connections",
+          "paragraphs": [
+            "Your search engine receives your queries. SearXNG is contacted when you confirm adding an instance or use it for search; remote suggestions from that instance are not enabled. uBO can download lists and extensions can check for updates. Pages you visit generate their own traffic.",
+            "A complete audit of inherited Firefox/Zen services and connections is not finished. We do not claim “zero connections”, “zero telemetry”, or that private browsing or Flatpak eliminates all tracking. Automatic browser updates are not operational; updates are currently manual."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "This website and reports",
+          "paragraphs": [
+            "This website’s code adds no analytics, ads, collection forms or remote fonts. Hosting may process technical access data; the private preview also depends on its provider’s authentication. GitHub links lead to a service with its own terms.",
+            "Regular issues are public. Do not attach complete profiles, passwords, API keys, cookies or browsing history. Share only reviewed logs and screenshots."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "help": {
+      "title": "Help and reports",
+      "intro": "Find known limitations and prepare a useful report.",
+      "sections": [
+        {
+          "heading": "Before reporting",
+          "paragraphs": [
+            "Search existing issues first. Note the version and build ID from about:support, OS, package format and exact steps. If possible, reproduce in a temporary profile; preserve your personal profile. Testing Firefox is not required to ask for help."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Report a bug or suggest an idea",
+          "paragraphs": [
+            "The buttons below prepare a regular issue in Umbral’s repository. GitHub asks you to sign in and review the text before submitting. This website sends nothing. Do not use these reports for vulnerabilities."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Known limitations",
+          "paragraphs": [
+            "Browser updates are manual. Windows is offered as an experimental ZIP. Distribution signing and Flathub publication are pending. Full-package Spanish and external managers’ native integrations need broader validation.",
+            "ETP cards can take time to record activity and do not count uBO blocks. AI requires a running server and model. No performance improvement over an equivalent baseline has been demonstrated."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "If AI or extensions do not appear",
+          "paragraphs": [
+            "Check that you installed the regenerated package rather than only building engine/. The filename version may remain 1.0.0: use the build ID. AI must be able to open its panel without a model; extensions should retain their chosen placement. Failure here is a regression you can report."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "security": {
+      "title": "Security",
+      "intro": "Responsible vulnerability reporting and the limits of current maintenance.",
+      "sections": [
+        {
+          "heading": "Private reports",
+          "paragraphs": [
+            "Do not publish exploit details, secrets or third-party data in a regular issue. In GitHub’s Security tab, use “Report a vulnerability” if enabled. Its availability has not been verified or enabled by this website.",
+            "If the private channel is absent, open only a security-contact request without describing the vulnerability. No invented email address or promised response time is provided."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Repository security",
+              "href": "https://github.com/Martin08ABM/umbral-browser/security"
+            },
+            {
+              "label": "How GitHub private reporting works",
+              "href": "https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately"
+            }
+          ]
+        },
+        {
+          "heading": "What to include privately",
+          "paragraphs": [
+            "Version, build ID, platform, minimal steps, observed impact and a proof of concept without real data. Separate observations from suspicions. Investigate only systems and data you are authorized to test."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Maintenance status",
+          "paragraphs": [
+            "Umbral is experimental. There is not yet a guaranteed patch schedule, supported-version matrix or operational browser update channel. Inheriting Firefox is not enough: integrating and distributing fixes remains the project’s responsibility."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "conduct": {
+      "title": "Code of conduct",
+      "intro": "A space to collaborate respectfully and disagree about ideas.",
+      "sections": [
+        {
+          "heading": "How we participate",
+          "paragraphs": [
+            "Treat people respectfully regardless of experience, background, identity or beliefs. Accept criticism of code and project decisions. Be clear and direct without attacking participants."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Boundaries",
+          "paragraphs": [
+            "Harassment, threats, discrimination, personal insults, exposing private information and unwanted sexual attention are not acceptable. Technical or ideological disagreement does not justify them. Do not turn technical issues into unrelated campaigns."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Moderation and scope",
+          "paragraphs": [
+            "These rules apply to Umbral spaces and official project representatives. Moderation may request changes, remove content or proportionately limit participation; serious cases may require immediate restrictions."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Reporting an incident",
+          "paragraphs": [
+            "You can use GitHub’s tools to report abusive content on its platform. The project still needs to configure a dedicated private moderation contact before opening a broader community. Do not post personal data or sensitive reports in issues; do not use Zen’s email for Umbral incidents."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "contribute": {
+      "title": "Contribute to Umbral",
+      "intro": "How to propose reproducible changes without losing persistent sources.",
+      "sections": [
+        {
+          "heading": "Before starting",
+          "paragraphs": [
+            "For large changes, start with a proposal explaining the problem and desired outcome. Code is not the only way to help: clear reports, translations, documentation and platform testing are useful too."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Sources and builds",
+          "paragraphs": [
+            "Work from the Umbral repo root. engine/ is a separate generated repository; do not treat it as the source of truth. Browser changes belong in src/, prefs/, configs/, locales/, surfer.json and their patches. Preserve symlinks and register new resources using the existing packaging flow.",
+            "For a new checkout with Mozilla and project prerequisites prepared, use npm ci and npm run init before building. In an initialized tree, import and build current changes. Do not update the pinned base as a side effect of a UI task."
+          ],
+          "code": "npm run import\nMOZ_PURGE_CACHES=1 npm run build:ui\ngit diff --check",
+          "links": []
+        },
+        {
+          "heading": "What a change should include",
+          "paragraphs": [
+            "Describe the problem, final behavior, tests performed and their limits. Use temporary profiles; do not attach personal profiles. Distinguish builds, static inspection and runtime verification. Tests should check behavior rather than mirror the implementation."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Credits and scope",
+          "paragraphs": [
+            "Keep license and attribution notices. Do not remove credits or globally rename technical Zen or Firefox references. For security fixes, use the private channel rather than a public PR containing exploitable details."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "project": {
+      "title": "The project",
+      "intro": "Why Umbral exists and what wider distribution still requires.",
+      "sections": [
+        {
+          "heading": "The idea",
+          "paragraphs": [
+            "Umbral aims to combine a considered visual experience with practical privacy and user control. It is Martin’s independent project built on Zen and Mozilla’s work, not an engine built from scratch."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "What we prioritize",
+          "paragraphs": [
+            "Reduce clutter, separate contexts with containers, protect from the start, and keep tools such as AI optional. Avoid adding features at the cost of reproducibility, data clarity or the ability to maintain the browser."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Next stage, without promised dates",
+          "paragraphs": [
+            "Priority: maintaining the base and reliably delivering fixes for Linux with Flatpak. Windows is offered as an experimental ZIP with manual updates. Production signing and updates, accessibility, connection auditing and evaluating Flathub also remain pending."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Credits and licenses",
+          "paragraphs": [
+            "The browser retains MPL-2.0 and component notices. uBlock Origin is redistributed original and signed, with GPL-3.0-only and attribution to Raymond Hill and contributors. Mozilla, Firefox and Zen marks belong to their owners. Umbral is not presented as their official product."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Umbral repository",
+              "href": "https://github.com/Martin08ABM/umbral-browser"
+            },
+            {
+              "label": "Zen Browser",
+              "href": "https://github.com/zen-browser/desktop"
+            },
+            {
+              "label": "Mozilla Firefox",
+              "href": "https://www.mozilla.org/firefox/"
+            },
+            {
+              "label": "uBlock Origin",
+              "href": "https://github.com/gorhill/uBlock"
+            }
+          ]
+        }
+      ]
+    },
+    "changelog": {
+      "title": "Changes and status",
+      "intro": "Development summary; not a substitute for published release notes.",
+      "sections": [
+        {
+          "heading": "Status as of 4 November 2026",
+          "paragraphs": [
+            "Linux test packages have been generated. No new tags, signatures or stable versions are assigned here. Builds may share the 1.0.0 name; identify each test by its build ID and commit when available."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Implemented and tested changes",
+          "paragraphs": [
+            "Homepage and local shortcuts; ETP metrics; original uBO; optional SearXNG; container inheritance; custom onboarding; General without account/Sync controls; password-saving offers separate from autofill; optional local AI sidebar.",
+            "Extension visibility after onboarding and the AI button moved by Zen into a hidden area were fixed. AI can open without a configured server. Development tests covered temporary profiles; the user also confirmed sending and receiving with a real server. This is not a complete compatible-model matrix."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Still pending",
+          "paragraphs": [
+            "Production infrastructure and keys, manual updates for the experimental Windows ZIP, broader language and accessibility validation, and AI panel interface refinements. No performance improvement has been demonstrated."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    }
+  },
+  "ca": {
+    "docs": {
+      "title": "Documentació",
+      "intro": "La teva guia per començar, configurar i entendre Umbral.",
+      "sections": [
+        {
+          "heading": "Comença aquí",
+          "paragraphs": [
+            "Umbral és un fork de Zen basat en Firefox. Linux amb Flatpak és la plataforma principal; Windows s’ofereix com a ZIP experimental amb actualitzacions manuals. No es presenta com una versió estable de distribució general."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Instal·lació i actualitzacions",
+              "href": "install"
+            }
+          ]
+        },
+        {
+          "heading": "Personalitza la pàgina d’inici",
+          "paragraphs": [
+            "Afegeix els teus accessos, edita’n el nom i l’adreça, ordena’ls o elimina’ls. No s’afegeixen llocs automàticament. Les targetes inferiors mostren registres ETP i l’estat d’uBlock Origin."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Cercadors i SearXNG",
+          "paragraphs": [
+            "A Preferències → Cerca pots triar el motor. Per a SearXNG, introdueix la URL d’una instància de confiança i confirma l’alta. Escriure l’adreça no la contacta. Afegir-la no canvia el motor fins que el seleccionis; no s’habiliten suggeriments remots d’aquella instància."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "IA local, pas a pas",
+          "paragraphs": [
+            "Activa-la a la benvinguda o a Preferències → IA local. El botó obre el panell encara que no hi hagi un model configurat. És opcional i comença desactivada.",
+            "Executa un servidor local compatible amb l’API d’OpenAI, configura’n l’adreça base i el nom exacte del model, i desa. Per exemple, http://127.0.0.1:1234/v1 si el servidor escolta allà. Umbral afegeix /chat/completions; no incloguis aquella ruta a l’adreça base. La clau API és opcional segons el servidor.",
+            "Només s’envia una sol·licitud en enviar un missatge. Pots cancel·lar-la, amagar o redimensionar el panell i esborrar la conversa. Umbral no descarrega ni executa el model."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Contenidors, extensions i contrasenyes",
+          "paragraphs": [
+            "Les pestanyes noves hereten el contenidor actiu; sense una pestanya útil, es fa servir l’últim utilitzat en aquell espai. Pots seleccionar-ne un altre al desplegable. Els contenidors separen contextos de sessió; no proporcionen anonimat.",
+            "uBO manté el panell original al costat de la barra. A Preferències pots deixar de rebre ofertes per desar contrasenyes sense desactivar l’emplenament automàtic ni esborrar claus existents. Algunes integracions de gestors externs amb programes de l’equip necessiten suport específic per a Flatpak."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "install": {
+      "title": "Instal·lació i descàrregues",
+      "intro": "Paquets de prova i passos per utilitzar-los sense barrejar els perfils.",
+      "sections": [
+        {
+          "heading": "Disponibilitat real",
+          "paragraphs": [
+            "Linux x86_64 amb Flatpak és la plataforma principal i recomanada. Windows x86_64 s’ofereix com a ZIP experimental, amb instal·lació i actualitzacions manuals. Aquesta web no allotja binaris ni anuncia disponibilitat a Flathub."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Codi i paquets publicats, si n’hi ha",
+              "href": "https://github.com/Martin08ABM/umbral-browser/releases"
+            },
+            {
+              "label": "Guia tècnica de compilació",
+              "href": "https://github.com/Martin08ABM/umbral-browser/blob/main/docs/test-builds.md"
+            }
+          ]
+        },
+        {
+          "heading": "Instal·la el teu bundle Flatpak",
+          "paragraphs": [
+            "Amb Flatpak i el runtime necessari disponibles, executa això des de l’arrel del checkout amb el bundle acabat de generar. No és una descàrrega pública d’aquesta web."
+          ],
+          "code": "flatpak install --user dist/umbral-linux-x86_64.flatpak\nflatpak run io.github.martin08abm.umbralbrowser",
+          "links": []
+        },
+        {
+          "heading": "Perfil permanent i navegador predeterminat",
+          "paragraphs": [
+            "El llançador Flatpak utilitza ~/.var/app/io.github.martin08abm.umbralbrowser/data/umbral/profile. Els perfils de proves sota /tmp són temporals. Conserva una còpia de les dades abans de migrar; no copiïs un perfil mentre el navegador estigui obert.",
+            "A KDE selecciona Umbral a Arranjament del sistema → Aplicacions predeterminades → Navegador web. A Flatpak, l’assistent no el pot establir directament i remet a la configuració de l’escriptori."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Actualitza manualment",
+          "paragraphs": [
+            "Les actualitzacions automàtiques del navegador no estan operatives. Abans de substituir un paquet, tanca Umbral i fes una còpia del perfil. Compila o aconsegueix un bundle més recent de confiança. Reinstal·lar conserva les dades si no utilitzes --delete-data. Comprova l’identificador de compilació a about:support; el nom del paquet pot continuar sent 1.0.0."
+          ],
+          "code": "flatpak uninstall --user io.github.martin08abm.umbralbrowser\nflatpak install --user dist/umbral-linux-x86_64.flatpak",
+          "links": []
+        },
+        {
+          "heading": "Desinstal·la sense esborrar dades",
+          "paragraphs": [
+            "Això elimina l’aplicació i conserva el perfil. Afegir --delete-data també esborra les dades privades de l’aplicació: és una opció destructiva, no un pas d’actualització."
+          ],
+          "code": "flatpak uninstall --user io.github.martin08abm.umbralbrowser",
+          "links": []
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacitat i dades",
+      "intro": "Què protegeix Umbral, què desa i quan poden sortir dades de l’equip.",
+      "sections": [
+        {
+          "heading": "Abast d’aquestes notes",
+          "paragraphs": [
+            "Aquestes notes descriuen les funcions conegudes d’Umbral a 4 de novembre de 2026. No són una auditoria completa del trànsit de Firefox, una garantia d’anonimat ni una certificació de compliment normatiu. Les pràctiques de cada proveïdor extern també compten."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Proteccions i estadístiques",
+          "paragraphs": [
+            "ETP estricte i FPP estan actius; RFP continua desactivat. uBlock Origin es distribueix sense modificar i manté els seus filtres, controls i excepcions. La protecció redueix part del rastreig, però una empremta digital encara pot ser distingible.",
+            "Les targetes consulten només agregats de rastrejadors i galetes de rastreig classificats per ETP, avui i els sis dies UTC anteriors. No són estadístiques d’uBO, anuncis individuals ni peticions HTTP. Firefox exclou l’activitat privada d’aquest registre persistent. La pàgina d’inici rep dos nombres i l’estat d’uBO, no URL ni historial."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "IA local i credencials",
+          "paragraphs": [
+            "La IA comença desactivada. Activar-la, obrir el panell o desar ajustos no genera trànsit. En enviar, el servidor configurat rep el text de la conversa; no es recullen automàticament pestanyes, pàgines, historial ni formularis. Revisa el text que enganxis i la configuració del servidor.",
+            "Les converses viuen en memòria, separades per finestra i per navegació normal o privada. Amagar el panell les conserva; pots esborrar-les. La clau es desa amb LoginManager, no en aquesta web. Un servidor local pot desar els seus logs: aquella configuració queda fora d’Umbral."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Connexions externes",
+          "paragraphs": [
+            "El cercador rep les consultes. SearXNG es contacta en confirmar l’alta d’una instància o en utilitzar-la per cercar; no s’activen suggeriments remots d’aquella instància. uBO pot descarregar llistes i les extensions poden consultar actualitzacions. Les pàgines visitades generen el seu propi trànsit.",
+            "No s’ha completat una auditoria de totes les connexions i serveis heretats de Firefox/Zen. No afirmem «zero connexions», «zero telemetria» ni que el mode privat o Flatpak eliminin tot rastreig. Les actualitzacions automàtiques del navegador no estan operatives; de moment, cal actualitzar-lo manualment."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Aquesta web i els informes",
+          "paragraphs": [
+            "El codi d’aquesta web no afegeix analítica, anuncis, formularis de recollida ni fonts remotes. L’allotjament pot processar dades tècniques d’accés; la vista privada també depèn de l’autenticació del proveïdor. Els enllaços a GitHub porten a un servei amb les seves condicions.",
+            "Els issues normals són públics. No hi adjuntis perfils complets, contrasenyes, claus API, galetes ni historials. Comparteix només logs i captures revisats."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "help": {
+      "title": "Ajuda i informes",
+      "intro": "Troba les limitacions conegudes i prepara un informe útil.",
+      "sections": [
+        {
+          "heading": "Abans d’informar",
+          "paragraphs": [
+            "Cerca si el problema ja existeix. Anota la versió i l’ID de compilació d’about:support, el sistema, el format del paquet i els passos exactes. Si pots, reprodueix-lo en un perfil temporal; conserva el perfil personal. No cal provar Firefox per demanar ajuda."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Informa d’un error o proposa una idea",
+          "paragraphs": [
+            "Els botons següents preparen un issue normal al repositori d’Umbral. GitHub et demanarà iniciar sessió i revisar el text abans d’enviar-lo. Aquesta web no envia res. No utilitzis aquests informes per a vulnerabilitats."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Limitacions conegudes",
+          "paragraphs": [
+            "Les actualitzacions del navegador són manuals. Windows s’ofereix com a ZIP experimental. La signatura de distribució i la publicació a Flathub estan pendents. El castellà del paquet complet i les integracions natives de gestors externs necessiten una validació més àmplia.",
+            "Les targetes ETP poden trigar a registrar activitat i no compten bloquejos d’uBO. La IA necessita un servidor i un model actius. No s’ha demostrat una millora de rendiment respecte d’una referència equivalent."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Si la IA o les extensions no apareixen",
+          "paragraphs": [
+            "Comprova que has instal·lat el paquet regenerat i no només has compilat engine/. La versió del fitxer pot continuar sent 1.0.0: utilitza l’ID de compilació. La IA ha de poder obrir el panell sense model; les extensions han de conservar la ubicació triada. Si això falla, és una regressió que pots informar."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "security": {
+      "title": "Seguretat",
+      "intro": "Comunicació responsable de vulnerabilitats i límits del manteniment actual.",
+      "sections": [
+        {
+          "heading": "Informes privats",
+          "paragraphs": [
+            "No publiquis detalls d’explotació, secrets ni dades de tercers en un issue normal. A la pestanya Security de GitHub, utilitza «Report a vulnerability» si està habilitat. La disponibilitat no s’ha comprovat ni activat des d’aquesta web.",
+            "Si no apareix el canal privat, obre només una petició de contacte de seguretat, sense descriure la vulnerabilitat. No es publica un correu inventat ni es promet un temps de resposta."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Seguretat del repositori",
+              "href": "https://github.com/Martin08ABM/umbral-browser/security"
+            },
+            {
+              "label": "Com funciona l’informe privat a GitHub",
+              "href": "https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately"
+            }
+          ]
+        },
+        {
+          "heading": "Què cal incloure de manera privada",
+          "paragraphs": [
+            "Versió, ID de compilació, plataforma, passos mínims, impacte observat i una prova de concepte sense dades reals. Distingeix allò observat del que sospites. Investiga només sistemes i dades per als quals tinguis autorització."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Estat de manteniment",
+          "paragraphs": [
+            "Umbral és experimental. Encara no hi ha un calendari garantit de correccions, una matriu de versions suportades ni un canal operatiu d’actualització del navegador. Heretar Firefox no és suficient: integrar i distribuir les correccions continua sent responsabilitat del projecte."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "conduct": {
+      "title": "Codi de conducta",
+      "intro": "Un espai per col·laborar amb respecte i discrepar sobre idees.",
+      "sections": [
+        {
+          "heading": "Com participem",
+          "paragraphs": [
+            "Tracta les persones amb respecte, independentment de l’experiència, l’origen, la identitat o les creences. Accepta crítiques sobre el codi i les decisions del projecte. Sigues clar i directe sense atacar qui participa."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Límits",
+          "paragraphs": [
+            "No s’accepten assetjament, amenaces, discriminació, insults personals, exposició de dades privades ni atenció sexual no sol·licitada. Les diferències tècniques o ideològiques no justifiquen aquestes conductes. No converteixis issues tècnics en campanyes alienes al projecte."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Moderació i abast",
+          "paragraphs": [
+            "Aquestes normes s’apliquen als espais d’Umbral i als representants oficials del projecte. La moderació pot demanar canvis, retirar contingut o limitar proporcionalment la participació; els casos greus poden requerir restriccions immediates."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Comunica un incident",
+          "paragraphs": [
+            "Pots utilitzar les eines de GitHub per informar de contingut abusiu a la plataforma. El projecte encara ha de configurar un contacte privat específic de moderació abans d’obrir una comunitat més àmplia. No publiquis dades personals ni informes sensibles als issues; no utilitzis el correu de Zen per a incidents d’Umbral."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "contribute": {
+      "title": "Contribueix a Umbral",
+      "intro": "Com proposar canvis reproduïbles sense perdre les fonts persistents.",
+      "sections": [
+        {
+          "heading": "Abans de començar",
+          "paragraphs": [
+            "Per a canvis grans, obre primer una proposta amb el problema i el resultat esperat. No cal escriure codi per ajudar: també serveixen informes clars, traduccions, documentació i proves en altres plataformes."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Fonts i compilació",
+          "paragraphs": [
+            "Treballa des de l’arrel del repo d’Umbral. engine/ és un repositori generat diferent; no el tractis com a origen. Els canvis del navegador han de viure a src/, prefs/, configs/, locales/, surfer.json i els seus pedaços. Preserva els symlinks i registra els recursos nous segons l’empaquetament existent.",
+            "Per a un checkout nou amb els requisits de Mozilla i del projecte preparats, utilitza npm ci i npm run init abans de compilar. En un arbre inicialitzat, importa i compila els canvis actuals. No actualitzis la base fixada com a efecte secundari d’una tasca d’interfície."
+          ],
+          "code": "npm run import\nMOZ_PURGE_CACHES=1 npm run build:ui\ngit diff --check",
+          "links": []
+        },
+        {
+          "heading": "Què ha d’incloure una proposta de canvi",
+          "paragraphs": [
+            "Descriu el problema, el comportament final, les proves executades i els límits. Utilitza perfils temporals; no hi adjuntis perfils personals. Distingeix compilació, inspecció estàtica i verificació real. Les proves han de comprovar comportament, no repetir la implementació."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Crèdits i abast",
+          "paragraphs": [
+            "Mantén els avisos de llicència i atribució. No eliminis crèdits ni canviïs globalment referències tècniques de Zen o Firefox. Per a correccions de seguretat, utilitza el canal privat en lloc d’un PR públic amb detalls explotables."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    },
+    "project": {
+      "title": "El projecte",
+      "intro": "Per què existeix Umbral i què falta per a una distribució més àmplia.",
+      "sections": [
+        {
+          "heading": "La idea",
+          "paragraphs": [
+            "Umbral vol unir una experiència visual cuidada amb privacitat pràctica i control de l’usuari. És un projecte independent de Martin construït sobre el treball de Zen i Mozilla, no un motor creat des de zero."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Què prioritzem",
+          "paragraphs": [
+            "Reduir soroll, separar contextos amb contenidors, oferir protecció des del principi i fer opcionals eines com la IA. No afegir funcions a costa de perdre reproductibilitat, claredat sobre les dades o capacitat de mantenir el navegador."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Etapa següent, sense dates promeses",
+          "paragraphs": [
+            "Prioritat: manteniment de la base i lliurament fiable de correccions a Linux amb Flatpak. Windows s’ofereix com a ZIP experimental i necessita actualitzacions manuals. També queden pendents signatures i actualitzacions de producció, accessibilitat, auditoria de connexions i avaluació de Flathub."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Crèdits i llicències",
+          "paragraphs": [
+            "El navegador conserva MPL-2.0 i els avisos dels components. uBlock Origin es redistribueix original i signat, amb GPL-3.0-only i atribució a Raymond Hill i col·laboradors. Les marques de Mozilla, Firefox i Zen pertanyen als seus titulars. Umbral no es presenta com a producte oficial d’aquests projectes."
+          ],
+          "code": null,
+          "links": [
+            {
+              "label": "Repositori d’Umbral",
+              "href": "https://github.com/Martin08ABM/umbral-browser"
+            },
+            {
+              "label": "Zen Browser",
+              "href": "https://github.com/zen-browser/desktop"
+            },
+            {
+              "label": "Mozilla Firefox",
+              "href": "https://www.mozilla.org/firefox/"
+            },
+            {
+              "label": "uBlock Origin",
+              "href": "https://github.com/gorhill/uBlock"
+            }
+          ]
+        }
+      ]
+    },
+    "changelog": {
+      "title": "Canvis i estat",
+      "intro": "Resum de desenvolupament; no substitueix les notes d’una release publicada.",
+      "sections": [
+        {
+          "heading": "Estat a 4 de novembre de 2026",
+          "paragraphs": [
+            "S’han generat paquets Linux de prova. Aquí no s’assignen tags, signatures ni versions estables noves. Les compilacions poden compartir el nom 1.0.0; identifica cada prova per l’ID de compilació i el commit quan estigui disponible."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Canvis implementats i provats",
+          "paragraphs": [
+            "Pàgina d’inici i accessos locals; mètriques ETP; uBO original; SearXNG opcional; herència de contenidors; benvinguda pròpia; General sense accessos de compte i Sync; ofertes de desament separades de l’emplenament automàtic; panell d’IA local opcional.",
+            "Es van corregir la visibilitat d’extensions en acabar la benvinguda i el botó d’IA que Zen traslladava a una zona oculta. La IA pot obrir-se sense configurar servidor. Les proves de desenvolupament van cobrir perfils temporals; l’usuari també va confirmar enviament i recepció amb un servidor real. Això no és una matriu completa de models compatibles."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
+          "heading": "Pendent",
+          "paragraphs": [
+            "Infraestructura i claus de producció, actualització manual del ZIP experimental de Windows, validació més àmplia d’idioma i accessibilitat, i millores d’interfície del panell d’IA. No s’ha demostrat una millora de rendiment."
+          ],
+          "code": null,
+          "links": []
+        }
+      ]
+    }
+  }
+}

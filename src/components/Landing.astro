@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import {ui,pagePath,getPage,type PageSlug} from '../content/navigation';
+import Screenshot from './Screenshot.astro';
+import {getCopy, type Locale} from '../i18n';
+interface Props {lang: Locale}
+const {lang} = Astro.props;
+const t = getCopy(lang);
+const repo = 'https://github.com/Martin08ABM/umbral-browser';
+const focus = [{title:t.f1h,text:t.f1},{title:t.f2h,text:t.f2},{title:t.f3h,text:t.f3},{title:t.f4h,text:t.f4}];
+const features = [{title:t.feat1h,text:t.feat1},{title:t.feat2h,text:t.feat2},{title:t.feat3h,text:t.feat3}];
+const questions = [{q:t.q1,a:t.a1},{q:t.q2,a:t.a2},{q:t.q3,a:t.a3},{q:t.q4,a:t.a4},{q:t.q5,a:t.a5}];
+---
+<BaseLayout lang={lang}>
+  <Header lang={lang} />
+  <main class="wrap" id="main-content">
+    <section class="hero">
+      <div class="eyebrow"><span class="dot"></span>{t.eyebrow}</div>
+      <h1 set:html={t.heading} />
+      <p class="intro">{t.intro}</p>
+      <div class="actions"><a href="#focus" class="button primary">{t.meet} ↘</a><a href={repo} class="button" target="_blank" rel="noopener">{t.code} ↗</a></div>
+      <div class="note">{t.base}</div>
+      <Screenshot src="/umbral-home-real.png" alt={t.homealt} caption={t.homecaption} width={1200} height={720} eager expandLabel={t.expand} />
+    </section>
+    <div class="principles">{[t.p1,t.p2,t.p3,t.p4].map((label,i) => <span>0{i+1} &nbsp; {label}</span>)}</div>
+    <section class="section" id="focus">
+      <div class="section-label">{t.focuslabel}</div>
+      <div class="section-head"><h2 set:html={t.focush} /><p>{t.focusintro}</p></div>
+      <div class="focus-grid">{focus.map(({title,text}) => <article><h3>{title}</h3><p>{text}</p></article>)}</div>
+    </section>
+    <section class="section" id="experience">
+      <div class="section-label">{t.featurelabel}</div>
+      <div class="section-head"><h2 set:html={t.featureh} /><p>{t.featureintro}</p></div>
+      <div class="features">{features.map(({title,text},i) => <article class="feature"><span class="num">0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+    </section>
+    <section class="section ai-block" id="local-ai">
+      <div><div class="section-label">{t.ailabel}</div><h2 set:html={t.aih} /><p class="bodycopy">{t.aiintro}</p><span class="pill">{t.aipill}</span><p class="bodycopy">{t.aibody}</p></div>
+      <Screenshot src="/umbral-ai-real.png" alt={t.aialt} caption={t.aicaption} width={1280} height={972} compact />
+    </section>
+    <section class="section" id="probar">
+      <div class="section-label">{t.platformlabel}</div>
+      <div class="section-head"><h2 set:html={t.platformh} /><p>{t.platformintro}</p></div>
+      <div class="platforms">
+        <article class="platform"><span class="status">{t.intest}</span><h3>Linux · Flatpak</h3><p>{t.linux}</p><a class="button" href={`${repo}/blob/main/docs/test-builds.md`} target="_blank" rel="noopener">{t.guide}</a></article>
+        <article class="platform"><span class="status">{t.pending}</span><h3>Windows</h3><p>{t.windows}</p></article>
+      </div>
+      <p class="warning">{t.warning}</p>
+    </section>
+    <section class="section"><div class="section-label">{t.faqlabel}</div><div class="section-head"><h2 set:html={t.faqh} /></div>{questions.map(({q,a}) => <details><summary>{q}</summary><p>{a}</p></details>)}</section>
+    <section class="section" id="resources"><div class="section-label">{ui[lang].docs}</div><div class="section-head"><h2>{ui[lang].overview}</h2><p>{ui[lang].overviewIntro}</p></div><div class="resource-grid">{(['install','docs','privacy','help','project','contribute'] as PageSlug[]).map(slug=><a class="resource-card" href={pagePath(lang,slug)}><h3>{getPage(lang,slug).title}</h3><p>{getPage(lang,slug).intro}</p><span>{ui[lang].read}</span></a>)}</div></section>
+    <section class="end"><div class="section-label">{t.endlabel}</div><h2>{t.endh}</h2><a class="button primary" href={repo} target="_blank" rel="noopener">{t.follow}</a></section>
+    <Footer lang={lang} />
+  </main>
+</BaseLayout>

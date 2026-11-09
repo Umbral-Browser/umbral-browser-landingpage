@@ -1,0 +1,19 @@
+---
+import LanguagePicker from './LanguagePicker.astro';
+import type {Locale} from '../i18n';
+import {pagePath, ui, type PageSlug} from '../content/navigation';
+interface Props { lang: Locale; page?: PageSlug | '' }
+const {lang, page = ''} = Astro.props;
+const labels = ui[lang];
+const links = [{page:'docs',label:labels.docs},{page:'install',label:labels.install},{page:'privacy',label:labels.privacy},{page:'help',label:labels.help},{page:'project',label:labels.project}] as const;
+---
+<a class="skip" href="#main-content">{lang==='es'?'Saltar al contenido':lang==='ca'?'Salta al contingut':'Skip to content'} ↓</a>
+<nav aria-label={labels.menu}>
+  <a class="brand" href={pagePath(lang)} aria-label={`Umbral, ${labels.home}`}><img src="/icon.png" alt="" width="35" height="35" />UMBRAL</a>
+  <div class="links">
+    {links.map(link => <a href={pagePath(lang,link.page)} aria-current={link.page===page?'page':undefined}>{link.label}</a>)}
+    <details class="mobile-menu"><summary>{labels.menu} ⌄</summary><div>{links.map(link => <a href={pagePath(lang,link.page)}>{link.label}</a>)}</div></details>
+    <LanguagePicker lang={lang} page={page} />
+    <a class="github" href="https://github.com/Martin08ABM/umbral-browser" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</nav>

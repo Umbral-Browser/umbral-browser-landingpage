@@ -1,0 +1,12 @@
+---
+import {getCopy,type Locale} from '../i18n';
+import {ui,pagePath,getPage,type PageSlug} from '../content/navigation';
+interface Props {lang:Locale}
+const {lang}=Astro.props;
+const t=getCopy(lang);
+const slugs:PageSlug[]=['docs','help','privacy','security','conduct','contribute','changelog'];
+---
+<footer class="site-footer">
+ <div><a class="brand" href={pagePath(lang)}>UMBRAL</a><p>{t.author}</p><p>{ui[lang].note}</p></div>
+ <div class="footer-links">{slugs.map(slug => <a href={pagePath(lang,slug)}>{getPage(lang,slug).title}</a>)}<a href="https://github.com/Martin08ABM/umbral-browser">GitHub ↗</a></div>
+</footer>

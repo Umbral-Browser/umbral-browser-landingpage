@@ -1,0 +1,27 @@
+name: Feature proposal
+description: Explain a problem and suggest an improvement for Umbral.
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: Please search existing proposals and keep private information out of this public issue.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or current workaround
+  - type: textarea
+    id: impact
+    attributes:
+      label: Privacy, accessibility, compatibility and maintenance considerations

@@ -1,0 +1,15 @@
+---
+import Landing from '../components/Landing.astro';
+import ArticlePage from '../components/ArticlePage.astro';
+import {languages,type Locale} from '../i18n';
+import {pagePath,pageSlugs,type PageSlug} from '../content/navigation';
+export function getStaticPaths(){
+ return languages.flatMap(({code})=>[
+  ...(code==='es'?[]:[{params:{route:code},props:{lang:code,page:''}}]),
+  ...pageSlugs.map(page=>({params:{route:pagePath(code,page).replace(/^\/|\/$/g,'')},props:{lang:code,page}}))
+ ]);
+}
+interface Props {lang:Locale;page:PageSlug|''}
+const {lang,page}=Astro.props;
+---
+{page ? <ArticlePage lang={lang} page={page} /> : <Landing lang={lang} />}

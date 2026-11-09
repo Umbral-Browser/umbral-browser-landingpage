@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import { languages, getCopy, type Locale } from '../i18n';
+import {pagePath, type PageSlug} from '../content/navigation';
+interface Props { lang: Locale; page?: PageSlug | ''; title?: string; description?: string }
+const {lang,page='',title:pageTitle,description} = Astro.props;
+const t = getCopy(lang);
+const plainHeading = t.heading.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
+const title = pageTitle ? `${pageTitle} — Umbral` : `Umbral — ${plainHeading}`;
+const canonicalURL = new URL(pagePath(lang,page), Astro.site);
+const descriptionText = description || t.intro;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101011" />
+    <meta name="description" content={descriptionText} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={descriptionText} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL('/umbral-home-real.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" href="/icon.png" />
+    {languages.map(({ code }) => <link rel="alternate" hreflang={code} href={new URL(pagePath(code,page), Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(pagePath('es',page), Astro.site)} />
+    <title>{title}</title>
+  </head>
+  <body><slot /></body>
+</html>

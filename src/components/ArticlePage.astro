@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import type {Locale} from '../i18n';
+import {ui,groups,pagePath,getPage,type PageSlug} from '../content/navigation';
+interface Props {lang:Locale; page:PageSlug}
+const {lang,page}=Astro.props;
+const content=getPage(lang,page);
+const labels=ui[lang];
+const repo='https://github.com/Martin08ABM/umbral-browser';
+const bugBody = lang==='es' ? '## Qué ocurre\n\n## Pasos para reproducir\n1. \n\n## Resultado esperado\n\n## Versión e ID de compilación (about:support)\n\n## Sistema, arquitectura y paquete\n\n## Logs o capturas revisados\nNo incluyas contraseñas, claves API, cookies ni perfiles completos.\n' : lang==='ca' ? '## Què passa\n\n## Passos per reproduir\n1. \n\n## Resultat esperat\n\n## Versió i ID de compilació (about:support)\n\n## Sistema, arquitectura i paquet\n\n## Logs o captures revisats\nNo incloguis contrasenyes, claus API, galetes ni perfils complets.\n' : '## What happened\n\n## Steps to reproduce\n1. \n\n## Expected result\n\n## Version and build ID (about:support)\n\n## OS, architecture and package\n\n## Reviewed logs or screenshots\nDo not include passwords, API keys, cookies or complete profiles.\n';
+const ideaBody = lang==='es' ? '## Problema que quiero resolver\n\n## Propuesta\n\n## Alternativas\n\n## Efectos sobre privacidad y compatibilidad\n' : lang==='ca' ? '## Problema que vull resoldre\n\n## Proposta\n\n## Alternatives\n\n## Efectes sobre privacitat i compatibilitat\n' : '## Problem to solve\n\n## Proposal\n\n## Alternatives\n\n## Privacy and compatibility effects\n';
+const bugURL=repo+'/issues/new?'+new URLSearchParams({title:'[Bug] ',body:bugBody});
+const ideaURL=repo+'/issues/new?'+new URLSearchParams({title:'[Feature] ',body:ideaBody});
+const linkHref=(href:string)=>href.startsWith('https://')?href:pagePath(lang,href as PageSlug);
+---
+<BaseLayout lang={lang} page={page} title={content.title} description={content.intro}>
+ <Header lang={lang} page={page} />
+ <div class="wrap article-grid">
+  <aside class="doc-sidebar" aria-label={labels.docs}>
+   <a class="doc-home" href={pagePath(lang)}>← {labels.home}</a>
+   {groups.map(group => <div class="doc-group"><p>{labels[group.label]}</p>{group.pages.map(slug=><a href={pagePath(lang,slug)} aria-current={slug===page?'page':undefined}>{getPage(lang,slug).title}</a>)}</div>)}
+  </aside>
+  <main id="main-content" class="article">
+   <div class="section-label">{labels.guide}</div>
+   <h1>{content.title}</h1><p class="article-lead">{content.intro}</p>
+   <div class="article-status"><span class="dot"></span>{labels.note}</div>
+   <nav class="contents" aria-label={labels.docs}>{content.sections.map((s,i)=><a href={`#section-${i+1}`}>{s.heading}</a>)}</nav>
+   {content.sections.map((s,i)=><section class="article-section" id={`section-${i+1}`}><h2>{s.heading}</h2>{s.paragraphs.map(p=><p>{p}</p>)}{s.code&&<pre><code>{s.code}</code></pre>}{s.links.length>0&&<div class="article-links">{s.links.map(link=><a href={linkHref(link.href)} target={link.href.startsWith('https://')?'_blank':undefined} rel={link.href.startsWith('https://')?'noopener':undefined}>{link.label} →</a>)}</div>}</section>)}
+   {page==='help'&&<div class="report-box"><h2>{labels.help}</h2><div class="actions"><a class="button primary" href={bugURL} target="_blank" rel="noopener">{labels.bug}</a><a class="button" href={ideaURL} target="_blank" rel="noopener">{labels.idea}</a></div><a href={pagePath(lang,'security')}>{labels.private} →</a></div>}
+   {page==='docs'&&<div class="resource-grid">{(['install','privacy','help','contribute'] as PageSlug[]).map(slug=><a class="resource-card" href={pagePath(lang,slug)}><h3>{getPage(lang,slug).title}</h3><p>{getPage(lang,slug).intro}</p><span>{labels.read}</span></a>)}</div>}
+  </main>
+ </div>
+ <div class="wrap"><Footer lang={lang} /></div>
+</BaseLayout>

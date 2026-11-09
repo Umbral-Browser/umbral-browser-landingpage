@@ -1,0 +1,17 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  eager?: boolean;
+  compact?: boolean;
+  expandLabel?: string;
+}
+const {src,alt,caption,width,height,eager=false,compact=false,expandLabel} = Astro.props;
+---
+<figure class:list={['screenshot', {'ai-real': compact}]}>
+  <a href={src} target="_blank" rel="noopener"><img class="real-shot" src={src} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} /></a>
+  <figcaption>{caption}{expandLabel && <> <a class="figure-link" href={src} target="_blank" rel="noopener">{expandLabel}</a></>}</figcaption>
+</figure>

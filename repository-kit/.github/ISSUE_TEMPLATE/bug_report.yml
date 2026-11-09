@@ -1,0 +1,78 @@
+name: Bug report
+description: Report a reproducible Umbral Browser problem.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for testing Umbral. This report is public.
+        Do not include credentials, API keys, cookies, personal history or complete profiles.
+        For vulnerabilities, follow SECURITY.md instead.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before reporting
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: This is a normal bug report, not a private security disclosure.
+          required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and build ID
+      description: Copy the version and build ID from about:support. Do not write only "latest".
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: OS, architecture and package
+      placeholder: Linux x86_64, Flatpak, KDE Wayland
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Area
+      options:
+        - Homepage and shortcuts
+        - Toolbar and extensions
+        - Local AI
+        - Search and SearXNG
+        - Containers and tabs
+        - Settings and onboarding
+        - Packaging and installation
+        - Privacy metrics
+        - Accessibility and translation
+        - Performance
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open...
+        2. Select...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reviewed screenshots, logs and additional context
+      description: Share only relevant excerpts without secrets or personal data. A temporary-profile reproduction is helpful, not mandatory.

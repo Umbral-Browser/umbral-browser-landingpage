@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security reporting instructions
+    url: https://github.com/Martin08ABM/umbral-browser/security
+    about: Use private reporting if enabled. Do not disclose vulnerabilities in public issues.
