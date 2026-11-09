@@ -9,6 +9,7 @@ const plainHeading = t.heading.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
 const title = pageTitle ? `${pageTitle} — Umbral` : `Umbral — ${plainHeading}`;
 const canonicalURL = new URL(pagePath(lang,page), Astro.site);
 const descriptionText = description || t.intro;
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID?.trim();
 ---
 <!doctype html>
 <html lang={lang}>
@@ -28,6 +29,13 @@ const descriptionText = description || t.intro;
     {languages.map(({ code }) => <link rel="alternate" hreflang={code} href={new URL(pagePath(code,page), Astro.site)} />)}
     <link rel="alternate" hreflang="x-default" href={new URL(pagePath('es',page), Astro.site)} />
     <title>{title}</title>
+    {umamiWebsiteId && <script
+      is:inline
+      defer
+      src="https://stats.umbral-browser.org/script.js"
+      data-website-id={umamiWebsiteId}
+      data-domains="umbral-browser.org,www.umbral-browser.org"
+    ></script>}
   </head>
   <body><slot /></body>
 </html>

@@ -43,6 +43,12 @@ SITE_URL=https://tu-dominio.example npm run build
 
 Los recursos y enlaces internos suponen alojamiento en la raíz del dominio, no en un subdirectorio de GitHub Pages.
 
+## Analítica y descargas
+
+Para activar Umami autoalojado, configura `PUBLIC_UMAMI_WEBSITE_ID` con el ID del sitio en un archivo `.env` local o como variable de entorno del proveedor de alojamiento antes de ejecutar `npm run build`. Por ejemplo: `PUBLIC_UMAMI_WEBSITE_ID=tu-id npm run build`. Sin esa variable, no se incluye el tracker. Solo se activa en `umbral-browser.org` y `www.umbral-browser.org`. Los clics de descarga registran el evento `download` y la propiedad `platform`.
+
+Las URLs de ambos botones están en `src/content/downloads.ts`. Por ahora apuntan a GitHub Releases; sustituye `linuxFlatpak` y `windowsExe` por las URLs directas de los assets cuando se publiquen.
+
 En Cloudflare Pages, Netlify u otro alojamiento estático: comando `npm run build`, directorio de salida `dist`. Configura `SITE_URL` con el dominio definitivo y recompila antes de publicar.
 
 ## Imágenes y contenido

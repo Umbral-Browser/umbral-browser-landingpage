@@ -5,6 +5,7 @@ import Footer from './Footer.astro';
 import {ui,pagePath,getPage,type PageSlug} from '../content/navigation';
 import Screenshot from './Screenshot.astro';
 import {getCopy, type Locale} from '../i18n';
+import { downloadUrls } from '../content/downloads';
 interface Props {lang: Locale}
 const {lang} = Astro.props;
 const t = getCopy(lang);
@@ -43,8 +44,8 @@ const questions = [{q:t.q1,a:t.a1},{q:t.q2,a:t.a2},{q:t.q3,a:t.a3},{q:t.q4,a:t.a
       <div class="section-label">{t.platformlabel}</div>
       <div class="section-head"><h2 set:html={t.platformh} /><p>{t.platformintro}</p></div>
       <div class="platforms">
-        <article class="platform"><span class="status">{t.intest}</span><h3>Linux · Flatpak</h3><p>{t.linux}</p><a class="button" href={`${repo}/blob/main/docs/test-builds.md`} target="_blank" rel="noopener">{t.guide}</a></article>
-        <article class="platform"><span class="status">{t.pending}</span><h3>Windows</h3><p>{t.windows}</p></article>
+        <article class="platform"><span class="status">{t.intest}</span><h3>Linux · Flatpak</h3><p>{t.linux}</p><a class="button primary" href={downloadUrls.linuxFlatpak} data-umami-event="download" data-umami-event-platform="linux-flatpak">{t.downloadLinux}</a> <a class="button" href={`${repo}/blob/main/docs/test-builds.md`} target="_blank" rel="noopener">{t.guide}</a></article>
+        <article class="platform"><span class="status">{t.pending}</span><h3>Windows</h3><p>{t.windows}</p><a class="button primary" href={downloadUrls.windowsExe} data-umami-event="download" data-umami-event-platform="windows-exe">{t.downloadWindows}</a></article>
       </div>
       <p class="warning">{t.warning}</p>
     </section>

@@ -21,8 +21,21 @@ for (const file of pages) {
   assert.match(html, /id="main-content"/, relative+' must provide skip target');
   assert.match(html, /rel="canonical"/, relative+' must have canonical metadata');
   assert.equal((html.match(/hreflang="(?:es|en|ca)"/g)||[]).length,6,relative+' needs alternate and picker links');
-  assert.ok(!html.includes('<script'),relative+' should work without client JS');
-  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
+  const scripts = [...html.matchAll(/<script\b[^>]*><\/script>/g)].map(match => match[0]);
+  assert.ok(scripts.length <= 1, relative+' must not include other scripts');
+  assert.equal((html.match(/<script\b/g)||[]).length, scripts.length, relative+' contains unexpected scripts');
+  if (scripts.length) {
+    assert.match(scripts[0], /\bdefer\b/);
+    assert.match(scripts[0], /src="https:\/\/stats\.umbral-browser\.org\/script\.js"/);
+    assert.match(scripts[0], /data-website-id="[^" ]+"/);
+    assert.match(scripts[0], /data-domains="umbral-browser\.org,www\.umbral-browser\.org"/);
+  }
+  if (relative === 'index.html' || relative === 'en/index.html' || relative === 'ca/index.html') {
+    for (const platform of ['linux-flatpak', 'windows-exe']) {
+      assert.match(html, new RegExp(`<a\\b[^>]*data-umami-event="download"[^>]*data-umami-event-platform="${platform}"`), relative);
+    }
+  }
+  const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]);
   assert.equal(new Set(ids).size,ids.length,relative+' has duplicate IDs');
   for (const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     const raw=match[1].replaceAll('&amp;','&');
@@ -46,4 +59,4 @@ for (const [lang,localized] of Object.entries(content)) for (const [slug,page] o
  assert.ok(page.title&&page.intro&&page.sections.length,`${lang}/${slug} empty`);
  assert.ok(page.sections.every(s=>s.heading&&s.paragraphs.every(Boolean)),`${lang}/${slug} incomplete`);
 }
-console.log(`Verified ${pages.length} HTML pages, ${links} local links/resources, anchors, metadata, translation coverage and no client JavaScript.`);
+console.log(`Verified ${pages.length} HTML pages, ${links} local links/resources, anchors, metadata, translation coverage and analytics script.`);

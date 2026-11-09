@@ -152,7 +152,7 @@
         {
           "heading": "Esta web y los reportes",
           "paragraphs": [
-            "El código de esta web no añade analítica, anuncios, formularios de recogida ni fuentes remotas. El alojamiento puede procesar datos técnicos de acceso; la vista privada también depende de la autenticación de su proveedor. Al seguir enlaces a GitHub se aplican sus propias condiciones.",
+            "Si está configurada, esta web usa Umami autoalojado en stats.umbral-browser.org para medir visitas y clics en los botones de descarga. El evento registra la plataforma elegida (Linux Flatpak o Windows EXE); no se añaden datos personales a ese evento. Umami y el alojamiento pueden procesar datos técnicos de acceso, como la página visitada, el navegador y la dirección IP. Los enlaces a GitHub llevan a un servicio con sus propias condiciones.",
             "Los issues normales son públicos. No adjuntes perfiles completos, contraseñas, claves API, cookies ni historiales. Comparte solo logs y capturas revisados."
           ],
           "code": null,
@@ -556,7 +556,7 @@
         {
           "heading": "This website and reports",
           "paragraphs": [
-            "This website’s code adds no analytics, ads, collection forms or remote fonts. Hosting may process technical access data; the private preview also depends on its provider’s authentication. GitHub links lead to a service with its own terms.",
+            "When configured, this website uses self-hosted Umami at stats.umbral-browser.org to measure visits and clicks on download buttons. The event records the chosen platform (Linux Flatpak or Windows EXE); no personal information is added to that event. Umami and the hosting provider may process technical access data, such as the page visited, browser and IP address. GitHub links lead to a service with its own terms.",
             "Regular issues are public. Do not attach complete profiles, passwords, API keys, cookies or browsing history. Share only reviewed logs and screenshots."
           ],
           "code": null,
@@ -960,7 +960,7 @@
         {
           "heading": "Aquesta web i els informes",
           "paragraphs": [
-            "El codi d’aquesta web no afegeix analítica, anuncis, formularis de recollida ni fonts remotes. L’allotjament pot processar dades tècniques d’accés; la vista privada també depèn de l’autenticació del proveïdor. Els enllaços a GitHub porten a un servei amb les seves condicions.",
+            "Quan està configurat, aquest web utilitza Umami autoallotjat a stats.umbral-browser.org per mesurar visites i clics als botons de descàrrega. L’esdeveniment registra la plataforma triada (Linux Flatpak o Windows EXE); no s’hi afegeixen dades personals. Umami i l’allotjament poden processar dades tècniques d’accés, com la pàgina visitada, el navegador i l’adreça IP. Els enllaços a GitHub porten a un servei amb les seves condicions.",
             "Els issues normals són públics. No hi adjuntis perfils complets, contrasenyes, claus API, galetes ni historials. Comparteix només logs i captures revisats."
           ],
           "code": null,

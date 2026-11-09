@@ -51,7 +51,7 @@
     "linux": "Flatpak para Linux x86_64, compilado y probado durante el desarrollo. Es la plataforma principal.",
     "guide": "Guía de compilación ↗",
     "windows": "ZIP experimental para Windows x86_64. La instalación y las actualizaciones son manuales; puede tener errores.",
-    "warning": "No es una versión estable publicada. Las actualizaciones del navegador son manuales; las extensiones tienen su propio mecanismo de actualización.",
+    "warning": "No es una versión estable publicada. Las actualizaciones del navegador son manuales; las extensiones tienen su propio mecanismo de actualización. Los botones llevan a GitHub Releases; los archivos definitivos aún están pendientes de publicación.",
     "faqlabel": "Sin letra pequeña escondida",
     "faqh": "Antes de cruzar<br>el umbral.",
     "q1": "¿Umbral me hace anónimo?",
@@ -70,7 +70,9 @@
     "language": "Idioma",
     "home": "Inicio",
     "q5": "¿Qué plataformas están disponibles?",
-    "a5": "Linux con Flatpak es la plataforma principal. Windows se ofrece como ZIP experimental y requiere actualización manual."
+    "a5": "Linux con Flatpak es la plataforma principal. Windows se ofrece como ZIP experimental y requiere actualización manual.",
+    "downloadLinux": "Ver releases para Linux (.flatpak) ↗",
+    "downloadWindows": "Ver releases para Windows (.exe) ↗"
   },
   "en": {
     "nav": "The browser",
@@ -124,7 +126,7 @@
     "linux": "Flatpak for Linux x86_64, built and tested during development. This is the primary platform.",
     "guide": "Build guide ↗",
     "windows": "Experimental ZIP for Windows x86_64. Installation and updates are manual; bugs are expected.",
-    "warning": "This is not a published stable release. Browser updates are manual; extensions have their own update mechanism.",
+    "warning": "This is not a published stable release. Browser updates are manual; extensions have their own update mechanism. The buttons lead to GitHub Releases; the final files are not yet published.",
     "faqlabel": "No hidden fine print",
     "faqh": "Before you cross<br>the threshold.",
     "q1": "Does Umbral make me anonymous?",
@@ -143,7 +145,9 @@
     "language": "Language",
     "home": "Home",
     "q5": "Which platforms are available?",
-    "a5": "Linux with Flatpak is the primary platform. Windows is offered as an experimental ZIP with manual updates."
+    "a5": "Linux with Flatpak is the primary platform. Windows is offered as an experimental ZIP with manual updates.",
+    "downloadLinux": "View releases for Linux (.flatpak) ↗",
+    "downloadWindows": "View releases for Windows (.exe) ↗"
   },
   "ca": {
     "nav": "El navegador",
@@ -197,7 +201,7 @@
     "linux": "Flatpak per a Linux x86_64, compilat i provat durant el desenvolupament. És la plataforma principal.",
     "guide": "Guia de compilació ↗",
     "windows": "ZIP experimental per a Windows x86_64. La instal·lació i les actualitzacions són manuals; pot tenir errors.",
-    "warning": "No és una versió estable publicada. Les actualitzacions del navegador són manuals; les extensions tenen el seu propi mecanisme d’actualització.",
+    "warning": "No és una versió estable publicada. Les actualitzacions del navegador són manuals; les extensions tenen el seu propi mecanisme d’actualització. Els botons porten a GitHub Releases; els fitxers definitius encara estan pendents de publicació.",
     "faqlabel": "Sense lletra petita amagada",
     "faqh": "Abans de creuar<br>el llindar.",
     "q1": "Umbral em fa anònim?",
@@ -216,6 +220,8 @@
     "language": "Idioma",
     "home": "Inici",
     "q5": "Quines plataformes estan disponibles?",
-    "a5": "Linux amb Flatpak és la plataforma principal. Windows s’ofereix com a ZIP experimental i requereix actualitzacions manuals."
+    "a5": "Linux amb Flatpak és la plataforma principal. Windows s’ofereix com a ZIP experimental i requereix actualitzacions manuals.",
+    "downloadLinux": "Veure releases per a Linux (.flatpak) ↗",
+    "downloadWindows": "Veure releases per a Windows (.exe) ↗"
   }
 }
