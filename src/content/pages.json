@@ -150,9 +150,19 @@
           "links": []
         },
         {
+          "heading": "Analítica de esta web",
+          "paragraphs": [
+            "Si se configura el identificador de Umami al compilar, esta web carga Umami Analytics desde stats.umbral-browser.org, descrito en el proyecto como autoalojado, para obtener estadísticas básicas de uso. Umami es una herramienta de analítica respetuosa con la privacidad; la landing no configura su uso para crear perfiles publicitarios. El script se incluye en las páginas y está configurado para registrar actividad solo en umbral-browser.org y www.umbral-browser.org. Sin identificador, no se incluye.",
+            "Los dos botones de descarga están marcados con el evento download y la propiedad platform: linux-flatpak o windows-exe. Esto mide clics, no confirma que la descarga se complete. El código de la landing no añade otros datos personalizados al evento. La página visitada, el navegador y la dirección IP pueden intervenir en las solicitudes; este repositorio no permite comprobar todos los datos procesados o conservados por Umami y el alojamiento.",
+            "El código propio de esta web no establece cookies ni utiliza almacenamiento local o de sesión. El script de Umami se carga desde un servidor externo: su código y la configuración del servidor no están en este repositorio, por lo que estas notas no describen todo su posible uso de almacenamiento o registros."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
           "heading": "Esta web y los reportes",
           "paragraphs": [
-            "Si está configurada, esta web usa Umami autoalojado en stats.umbral-browser.org para medir visitas y clics en los botones de descarga. El evento registra la plataforma elegida (Linux Flatpak o Windows EXE); no se añaden datos personales a ese evento. Umami y el alojamiento pueden procesar datos técnicos de acceso, como la página visitada, el navegador y la dirección IP. Los enlaces a GitHub llevan a un servicio con sus propias condiciones.",
+            "Los enlaces de descarga y otros enlaces llevan a GitHub; también hay enlaces a servicios externos como Mozilla. Al abrirlos, se aplican las condiciones y prácticas de esos servicios.",
             "Los issues normales son públicos. No adjuntes perfiles completos, contraseñas, claves API, cookies ni historiales. Comparte solo logs y capturas revisados."
           ],
           "code": null,
@@ -554,9 +564,19 @@
           "links": []
         },
         {
+          "heading": "Website analytics",
+          "paragraphs": [
+            "If an Umami website ID is configured at build time, this website loads Umami Analytics from stats.umbral-browser.org, described in the project as self-hosted, for basic usage statistics. Umami is a privacy-respecting analytics tool; the landing page does not configure it to create advertising profiles. The script is included on the pages and configured to record activity only on umbral-browser.org and www.umbral-browser.org. Without an ID, it is not included.",
+            "The two download buttons are marked with the download event and a platform property: linux-flatpak or windows-exe. This measures clicks, not completed downloads. The landing page code adds no other custom data to the event. The page visited, browser and IP address may be involved in requests; this repository cannot establish all data processed or retained by Umami and the hosting provider.",
+            "This website’s own code does not set cookies or use local or session storage. The Umami script is loaded from an external server: its code and server configuration are not in this repository, so these notes do not describe all of its possible storage or logging."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
           "heading": "This website and reports",
           "paragraphs": [
-            "When configured, this website uses self-hosted Umami at stats.umbral-browser.org to measure visits and clicks on download buttons. The event records the chosen platform (Linux Flatpak or Windows EXE); no personal information is added to that event. Umami and the hosting provider may process technical access data, such as the page visited, browser and IP address. GitHub links lead to a service with its own terms.",
+            "Download links and other links lead to GitHub; there are also links to external services such as Mozilla. Their own terms and practices apply when you open them.",
             "Regular issues are public. Do not attach complete profiles, passwords, API keys, cookies or browsing history. Share only reviewed logs and screenshots."
           ],
           "code": null,
@@ -958,9 +978,19 @@
           "links": []
         },
         {
+          "heading": "Analítica d’aquest web",
+          "paragraphs": [
+            "Si es configura l’identificador d’Umami en compilar, aquest web carrega Umami Analytics des de stats.umbral-browser.org, descrit al projecte com a autoallotjat, per obtenir estadístiques bàsiques d’ús. Umami és una eina d’analítica respectuosa amb la privacitat; la landing no en configura l’ús per crear perfils publicitaris. L’script s’inclou a les pàgines i està configurat per registrar activitat només a umbral-browser.org i www.umbral-browser.org. Sense identificador, no s’inclou.",
+            "Els dos botons de descàrrega estan marcats amb l’esdeveniment download i la propietat platform: linux-flatpak o windows-exe. Això mesura clics, no confirma que la descàrrega es completi. El codi de la landing no afegeix altres dades personalitzades a l’esdeveniment. La pàgina visitada, el navegador i l’adreça IP poden intervenir en les peticions; aquest repositori no permet comprovar totes les dades processades o conservades per Umami i l’allotjament.",
+            "El codi propi d’aquest web no estableix galetes ni utilitza emmagatzematge local o de sessió. L’script d’Umami es carrega des d’un servidor extern: el seu codi i la configuració del servidor no són en aquest repositori, de manera que aquestes notes no descriuen tot el seu possible ús d’emmagatzematge o registres."
+          ],
+          "code": null,
+          "links": []
+        },
+        {
           "heading": "Aquesta web i els informes",
           "paragraphs": [
-            "Quan està configurat, aquest web utilitza Umami autoallotjat a stats.umbral-browser.org per mesurar visites i clics als botons de descàrrega. L’esdeveniment registra la plataforma triada (Linux Flatpak o Windows EXE); no s’hi afegeixen dades personals. Umami i l’allotjament poden processar dades tècniques d’accés, com la pàgina visitada, el navegador i l’adreça IP. Els enllaços a GitHub porten a un servei amb les seves condicions.",
+            "Els enllaços de descàrrega i altres enllaços porten a GitHub; també hi ha enllaços a serveis externs com Mozilla. En obrir-los, s’apliquen les condicions i pràctiques d’aquests serveis.",
             "Els issues normals són públics. No hi adjuntis perfils complets, contrasenyes, claus API, galetes ni historials. Comparteix només logs i captures revisats."
           ],
           "code": null,
